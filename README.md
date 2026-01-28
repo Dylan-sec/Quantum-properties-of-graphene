@@ -3,7 +3,7 @@
 The objective of this program's design is to simply simulate the quantum properties of graphene that give it its unique electronic properties as a superconducting material.
 
 ---
- I: The Theory Behind Graphene :
+ **The Theory Behind Graphene**
 
 First named in 1789 as “graphite” by German mineralogist
 Abraham Gottlob Werner, theorized in 1947 by physicist P.R. Wallace, then isolated for the
@@ -45,7 +45,7 @@ New methods have been developed, such as:
 hydrazine as a reducing solvent).
 
 ---
-II) Network vector:
+**Network vector**
 
 In each layer of graphene, the carbon atoms are arranged in a hexagonal structure
 in the unit cell (the simplest repeating pattern).
@@ -69,7 +69,7 @@ those that do not belong to the lattice. We then create a table that will contai
 of the carbon atoms with a column with the coordinates x=t[n][0] and y = t[n][1].
 
 ---
-II) Calculation of the Hamiltonian:
+**Calculation of the Hamiltonian**
 
 
 The Hamiltonian of the $p_z$ orbitals in graphene can be described using the **Tight-Binding Method** (or LCAO), where the graphene Hamiltonian operator is defined as:
@@ -91,7 +91,7 @@ $$h_{ij} =
 \end{cases}$$
 
 ---
-III) Calculation of the Hamiltonian:
+**Calculation of the Hamiltonian**
 
 We are looking for a basis in which the Hamiltonian matrix of graphene is diagonal, so the first step will be to determine the eigenvalues, i.e., the eigenvalues of the system and the eigenvectors associated with these energies: 
 
@@ -120,7 +120,7 @@ $$\text{Norm} A_n = \sqrt{\sum (A[p])^2}$$
 This allows us to obtain the norm as a function of the number of eigenvectors.
 
 ---
-IV) Eigenstates and their Evolution in a Time-Independent Potential
+**Eigenstates and their Evolution in a Time-Independent Potential**
 
 The diagonalization of the Hamiltonian matrix allows us to determine the eigenstates of the system at time $t$ (denoted $|\psi(t)\rangle$) starting from an initial eigenstate at time $t_0$ ($|\psi(t_0)\rangle$). Since the Hamiltonian operator $\hat{H}$ is time-independent, we use the time-evolution operator $U(t, t_0)$:
 
@@ -159,19 +159,66 @@ The calculation of $|\psi(t)\rangle$ is then performed by taking the matrix prod
 ---
 **Modeling and Results**
 ---
-V) Modeling the structure of graphene
----
+**Modeling the structure of graphene**
+
 Here is our graphene ribbon containing 261 carbon atoms:
 
 <img width="2865" height="2115" alt="Capture d’écran 2026-01-28 174112_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/c6b4b8aa-134d-496d-b309-3eed8225f93d" />
 
 Graphene ribbon with a width
 l = 19 Å and a length L = 34 Å
+
 ---
 
-VI) Modeling the evolution over time of a state specific to time T0 and T
+**Modeling the evolution over time of a state specific to time T0 and T**
 
 In this modeling of the eigenstate at the initial time T0 and the eigenstate at time
 T=100, we have chosen and that of the orbital at coordinate (-7;0), and we note that the
 probability of the presence of the eigenstate of our orbital does not change over time. This
-is normal because an eigenstate of the Hamiltonian is invariant over time.
+is normal because an eigenstate of the Hamiltonian is invariant over time.<img width="1435" height="1080" alt="Capture d’écran 2026-01-28 174437_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/89d5699b-c383-4722-ada7-6599996fd5bf" />
+
+Probability of presence of the clean state at the initial moment T=0
+
+<img width="1735" height="1290" alt="Capture d’écran 2026-01-28 175722_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/405ddfee-c87c-4da2-9c73-09b9fe607fde" />
+
+Probabilité de présence de l’état propre à l’instant T=100
+
+---
+**Modeling a state that changes over time**
+
+In this model, we took as the initial state a state located on one of the
+orbitals at the edge of the graphene ribbon and observed the evolution of this state over time:
+
+<img width="4460" height="1160" alt="Capture d’écran 2026-01-28 175926_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/4b074224-f080-4b2e-81c4-eb7ddbf55f60" />
+
+Evolution of a state at T=0, T=3, and T=5
+
+We observe that the state gradually evolves over time from one end of the graphene ribbon to the other, like a wave propagating in one direction. This behavior is consistent with the wave-like nature of a quantum particle.
+
+---
+**Modeling the Edge Effect**
+
+In this case, we took the orbital with an intrinsic energy of almost zero, En≈ 0.
+
+<img width="3035" height="2160" alt="Capture d’écran 2026-01-28 180746_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/8e0643c4-ad92-48b7-a7c3-7c17588cbf91" />
+
+Side effect
+
+We note that the probability of the orbital state being present is very high at the edges
+of the graphene ribbon and almost zero at the center. This is known as the edge effect,
+which can be observed for orbitals with nearly zero eigenenergies.
+
+---
+**Bibliography**
+
+- Le graphène première cristal , Jean-Noël Fuchs • Mark Oliver Goerbig : https://www.lptmc.jussieu.fr/files/JNFuchs/GraphenePLS2008.pdf
+- Graphène: https://fr.wikipedia.org/wiki/Graph%C3%A8ne
+- Graphène: Fabrication et propriétés : http://physique.unice.fr/sem6/2014-2015/PagesWeb/PT/Graphene/proprietes.html
+- http://www.chimie-briere.com/COURS%20BASORGA%20HTM/COURS%20HTML/3_C_sp2.htm
+- http://tice.ac-montpellier.fr/ABCDORGA/Famille14/GRAPHENE.htm
+- http://physique.unice.fr/sem6/2014-2015/PagesWeb/PT/Graphene/experience.html
+
+
+
+
+
