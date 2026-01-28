@@ -241,7 +241,7 @@ which can be observed for orbitals with nearly zero eigenenergies.
 ---
 **Bibliography**
 
-- Le graphène première cristal , Jean-Noël Fuchs • Mark Oliver Goerbig : https://www.lptmc.jussieu.fr/files/JNFuchs/GraphenePLS2008.pdf
+- Le graphène première cristal , Jean-Noël Fuchs, Mark Oliver Goerbig : https://www.lptmc.jussieu.fr/files/JNFuchs/GraphenePLS2008.pdf
 - Graphène: https://fr.wikipedia.org/wiki/Graph%C3%A8ne
 - Graphène: Fabrication et propriétés : http://physique.unice.fr/sem6/2014-2015/PagesWeb/PT/Graphene/proprietes.html
 - http://www.chimie-briere.com/COURS%20BASORGA%20HTM/COURS%20HTML/3_C_sp2.htm
