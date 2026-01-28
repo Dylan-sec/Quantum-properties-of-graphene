@@ -44,4 +44,26 @@ New methods have been developed, such as:
 - Chemical method (involves oxidizing graphite in sulfuric acid using
 hydrazine as a reducing solvent).
 
+---
+ Network vector:
 
+In each layer of graphene, the carbon atoms are arranged in a hexagonal structure
+in the unit cell (the simplest repeating pattern).
+
+<img width="1255" height="830" alt="Capture d’écran 2026-01-28 145223_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/d6295dfa-6dc5-49cf-9136-d2b1e4f9682d" />
+<img width="850" height="755" alt="Capture d’écran 2026-01-28 145244_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/9773866b-e82a-4d7b-997d-b6fc34c9555a" />
+
+
+We have two basis vectors, which we will denote a and b, with coordinates a (0.1)*a and b (-1⁄2*,
+√(3/2))*a, where a is the graphene lattice parameter a = 0.246 nm, describing a
+translation of the lattice t=n*a+m*b (n and m are integers) as the translation vector
+only allows us to have the positions of carbon atoms belonging to the same
+lattice, and since the graphene pattern is composed of two atoms, we define a vector c with the
+coordinates of the carbon atom c (1/2,(1/(√3)*2))*a not belonging to the lattice and we
+thus obtain the new positions R=n*a+m*b+c.
+
+Using the Python programming language library “Numpy,” we can write the
+translation vector t = (r = a*n1 + b*n2 ), which gives us the position of the carbon atoms
+belonging to the lattice, and R (r = a*n1 + b*n2 +np.array([1/2, 1/(np.sqrt(3)*2)]) for
+those that do not belong to the lattice. We then create a table that will contain the positions
+of the carbon atoms with a column with the coordinates x=t[n][0] and y = t[n][1].
