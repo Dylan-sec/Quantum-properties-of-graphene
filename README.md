@@ -16,6 +16,7 @@ that is strong in the (xy) plane, rotated 120° relative to each other, and then
 2pz orbital perpendicular to the plane that does not participate in covalent bonds with the
 other carbon atoms.
 
+
 <img width="2885" height="1035" alt="Capture d’écran 2026-01-28 144327_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/0f4885ff-e57f-4bcb-8d1a-8cb9fe5cde1d" />
 
 Materials based on sp2 hybridized carbon can be classified into several forms depending on the
@@ -36,6 +37,7 @@ graphite. (Geim method) [1].
 heated in a vacuum to 1300°C, which evaporates, leaving only carbon atoms on the surface
 that together form thin layers of graphene. (De Heer method).
 
+
 <img width="1610" height="1050" alt="Capture d’écran 2026-01-28 144814_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/b194f2d6-689e-4674-afd3-552bc7e10aec" />
 
 New methods have been developed, such as:
@@ -50,8 +52,18 @@ hydrazine as a reducing solvent).
 In each layer of graphene, the carbon atoms are arranged in a hexagonal structure
 in the unit cell (the simplest repeating pattern).
 
-<img width="1255" height="800" alt="Capture d’écran 2026-01-28 145223_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/d6295dfa-6dc5-49cf-9136-d2b1e4f9682d" />
-<img width="850" height="800" alt="Capture d’écran 2026-01-28 145244_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/9773866b-e82a-4d7b-997d-b6fc34c9555a" />
+<table style="width: 100%;">
+  <tr>
+    <td style="width: 50%; text-align: center;">
+      <img src="https://github.com/user-attachments/assets/d6295dfa-6dc5-49cf-9136-d2b1e4f9682d" width="100%">
+      <br><em>Lattice Basis Vectors</em>
+    </td>
+    <td style="width: 50%; text-align: center;">
+      <img src="https://github.com/user-attachments/assets/9773866b-e82a-4d7b-997d-b6fc34c9555a" width="100%">
+      <br><em>Hexagonal Sublattices</em>
+    </td>
+  </tr>
+</table>
 
 Graphene Lattice Geometry and Atom Positioning
 
@@ -145,7 +157,9 @@ $$|\psi(t)\rangle = U(t, t_0) |\psi(t_0)\rangle$$
 
 To calculate the evolution operator $U$, we utilize the `expm` function from the **SciPy** library, which computes the matrix exponential. This function handles the essential and complex step of changing the matrix basis to perform the calculation. 
 
-To simplify the code, we consider the variable $T = (t - t_0) / \hbar$. For a Hamiltonian in eV, $T$ is in $\text{eV}^{-1}$ and time in seconds is $t - t_0 = T \times \hbar$. Finally, $|\psi(t)\rangle$ is calculated via the matrix product
+
+To simplify the code, we consider the variable $T = (t - t_0) / \hbar$. For a Hamiltonian in eV, $T$ is in $\text{eV}^{-1}$ and time in seconds is $t - t_0 = T \times \hbar$. Finally, $|\psi(t)\rangle$ is calculated via the matrix product.
+
 
 To calculate the evolution operator U, we used a function from the
 Scipy library called expm, which allows us to calculate the matrix exponential
@@ -165,8 +179,10 @@ In the Python implementation, this operator is calculated using the `expm` funct
 
 In the code and throughout this report, we use the variable $T = (t-t_{0})/\hbar$ to simplify the expression of time. 
 
+
 Thus, for a Hamiltonian expressed in eV, $T$ is in $\text{eV}^{-1}$ and the time in seconds is given by:
 $$t-t_{0} = T \times \hbar \text{ (eV}\cdot\text{s)}$$
+
 
 The calculation of $|\psi(t)\rangle$ is then performed by taking the matrix product of the initial state $|\psi(t_{0})\rangle$ and the time-evolution operator $U(t,t_{0}) = e^{-\frac{i}{\hbar}\hat{H} \times (t-t_0)}$:
 
