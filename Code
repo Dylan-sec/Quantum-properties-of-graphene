@@ -1,0 +1,108 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.linalg import expm
+
+x = []
+y = []
+r = []
+
+nn = 10
+l = 4
+L = 7
+natome = 2*(2*nn+1)**2
+t = np.zeros((natome, 2), dtype=float)
+print(t)
+print()
+a = np.array([-(1/2), np.sqrt(3)/2])
+b = np.array([1, 0])
+
+print("a=", a)
+n = -1
+for n1 in range(-nn, nn+1):
+    for n2 in range(-nn, nn+1):
+        
+        r = a*n1 + b*n2
+        if abs(r[0]) <= L and abs(r[1]) <= l:
+            n = n + 1
+            t[n] = r
+            print(n1, n2)
+            print()
+            print("t", t[n])
+            x.append(t[n][0])
+            y.append(t[n][1])
+            
+        r = a*n1 + b*n2 + np.array([1/2, 1/(np.sqrt(3)*2)])
+        if abs(r[0]) <= L and abs(r[1]) <= l:
+            n = n + 1
+            t[n] = r
+            print(n1, n2)
+            print()
+            print("t", t[n])
+            x.append(t[n][0])
+            y.append(t[n][1])
+
+#print("Les différentes positions des atomes de carbones ")
+#print(t)
+#print()
+#print("Nombre d'atome =", n+1, natome)
+
+#Definir la taille de matrice h de taille (n+1)
+h = np.zeros((n+1, n+1), dtype=float)
+for i in range(0, n-1):
+    for j in range(0, n-1):
+        if i!=j:
+            d = np.sqrt((t[j][0]-t[i][0])**2+(t[j][1]-t[i][1])**2)
+            if d < 0.6:
+                h[i][j]=2.7
+            else :
+                h[i][j]= 0
+            #print(h[i][j])
+#Affichage de la matrice h
+#print("H:", h)
+#print()
+#print("Coordonnée de a0", t[0])
+#print()
+#print("Coordonnée de a1", t[1])
+#print()
+
+#Calcul de Valeur et Vecteur Propre de la matrice h
+valp, vecp = np.linalg.eig(h)
+
+#print("Les vecteurs propres:", vecp)
+#print()
+#print("Les valeurs propres:", valp)
+#print()
+
+# Initialization of initial state
+p = 116
+vecp_initial = vecp[:, p]
+vecp_initial = np.zeros((n+1))
+vecp_initial[116] = 1
+
+# Time definition
+T = 3
+# Planck constant
+hbar = 6.626e-34 / (2 * np.pi)
+
+# Evolution Operator U
+U = expm(((-1j * h * T)))
+
+# Eigenstate at time T
+vecp_T = np.dot(U, vecp_initial)
+
+# Calculate probability density
+Z = (vecp_T * np.conj(vecp_T)).real
+
+# Figure plotting
+plt.scatter(x, y, c=Z, cmap="inferno", alpha=0.7, s=80)
+plt.colorbar(label='Probabilité de présence')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.axis("equal")
+plt.show()
+
+# Energy and atom count display
+print("Nombre d'atome:", n+1)
+for m in range(0, n):
+    print("n=", m, " En=valp=", valp[m])
+print(t[139])
