@@ -53,20 +53,30 @@ in the unit cell (the simplest repeating pattern).
 <img width="1255" height="800" alt="Capture d’écran 2026-01-28 145223_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/d6295dfa-6dc5-49cf-9136-d2b1e4f9682d" />
 <img width="850" height="800" alt="Capture d’écran 2026-01-28 145244_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/9773866b-e82a-4d7b-997d-b6fc34c9555a" />
 
+Graphene Lattice Geometry and Atom Positioning
 
-We have two basis vectors, which we will denote a and b, with coordinates a (0.1)*a and b (-1⁄2*,
-√(3/2))*a, where a is the graphene lattice parameter a = 0.246 nm, describing a
-translation of the lattice t=n*a+m*b (n and m are integers) as the translation vector
-only allows us to have the positions of carbon atoms belonging to the same
-lattice, and since the graphene pattern is composed of two atoms, we define a vector c with the
-coordinates of the carbon atom c (1/2,(1/(√3)*2))*a not belonging to the lattice and we
-thus obtain the new positions R=n*a+m*b+c.
+To model the hexagonal structure of graphene, we define two basis vectors, $\mathbf{a}$ and $\mathbf{b}$, which describe the translations of the lattice. Their coordinates are given by:
 
-Using the Python programming language library “Numpy,” we can write the
-translation vector t = (r = a*n1 + b*n2 ), which gives us the position of the carbon atoms
-belonging to the lattice, and R (r = a*n1 + b*n2 +np.array([1/2, 1/(np.sqrt(3)*2)]) for
-those that do not belong to the lattice. We then create a table that will contain the positions
-of the carbon atoms with a column with the coordinates x=t[n][0] and y = t[n][1].
+$$\mathbf{a} = a \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \quad \mathbf{b} = a \begin{pmatrix} -1/2 \\ \sqrt{3}/2 \end{pmatrix}$$
+
+Where $a$ is the graphene lattice parameter ($a = 0.246 \text{ nm}$). A translation vector $\mathbf{t} = n\mathbf{a} + m\mathbf{b}$ (where $n$ and $m$ are integers) provides the positions of carbon atoms belonging to the same lattice.
+
+Since the graphene pattern is composed of two atoms per unit cell, the translation vector $\mathbf{t}$ only allows us to obtain the positions of atoms in one sublattice. To define the second set of carbon atoms, we introduce a vector $\mathbf{c}$ with the following coordinates:
+
+$$\mathbf{c} = a \begin{pmatrix} 1/2 \\ 1/(2\sqrt{3}) \end{pmatrix}$$
+
+The positions of the atoms not belonging to the first lattice are thus obtained via $\mathbf{R} = n\mathbf{a} + m\mathbf{b} + \mathbf{c}$.
+
+#### Numerical Implementation with NumPy
+
+Using the **NumPy** library, we implement the translation vector $\mathbf{t}$ to obtain the positions of the carbon atoms. In the code, the positions are generated as follows:
+
+* **For the first lattice:** `t = n*a + m*b`
+* **For the second lattice:** `R = n*a + m*b + np.array([1/2, 1/(np.sqrt(3)*2)]) * a`
+
+We then create a table containing the positions of all carbon atoms, organized with columns for the coordinates:
+* $x = \text{t}[n][0]$
+* $y = \text{t}[n][1]$
 
 ---
 **Calculation of the Hamiltonian**
