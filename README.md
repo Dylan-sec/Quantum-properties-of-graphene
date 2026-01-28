@@ -69,60 +69,109 @@ those that do not belong to the lattice. We then create a table that will contai
 of the carbon atoms with a column with the coordinates x=t[n][0] and y = t[n][1].
 
 ---
+II) Calculation of the Hamiltonian:
+
+
+The Hamiltonian of the $p_z$ orbitals in graphene can be described using the **Tight-Binding Method** (or LCAO), where the graphene Hamiltonian operator is defined as:
+
+$$\hat{H} = \sum_{\langle i,j \rangle} -t |i\rangle \langle j| \quad \text{with } t = 2.7 \text{ eV}$$
+
+In the basis of the $p_z$ orbitals, denoted as $|i\rangle$ (where $i$ is the atom index), the Hamiltonian is represented by a matrix whose elements $h_{ij} = t_{ij}$ only include nearest-neighbor interactions (or coupling). 
+
+These represent atoms that form direct bonds : if orbitals $i$ and $j$ are neighbors, then $t_{ij} = 2.7 \text{ eV}$, otherwise $t_{ij} = 0$.
+
+To calculate the $h_{ij}$ elements of the matrix, we set the condition.
+
+The hopping condition is defined as :
+
+$$h_{ij} = 
+\begin{cases} 
+2.7 \text{ eV} & \text{if } d_{ij} < 0.6a \\
+0 \text{ eV} & \text{otherwise}
+\end{cases}$$
+
+---
 III) Calculation of the Hamiltonian:
 
-The Hamiltonian of graphene pz orbitals can be described using the tight-binding method (or LCAO method), in which the Hamiltonian operator of graphene is described by:
-In the pz orbital basis, denoted |i> with i as the atomic index, the Hamiltonian is represented by a Hamiltonian matrix whose elements hij=tij include only interactions between electrons of the same type.
+We are looking for a basis in which the Hamiltonian matrix of graphene is diagonal, so the first step will be to determine the eigenvalues, i.e., the eigenvalues of the system and the eigenvectors associated with these energies: 
 
+$$\hat{H}_0 |n\rangle = E_n |n\rangle$$
 
-<img width="351" height="47" alt="image" src="https://github.com/user-attachments/assets/b131d3e6-54fa-42bf-8a71-3c2ee69a2a95" />
+for $n=\{0, \dots , N-1\}$
 
+where $N$ is the total number of $p_z$ orbitals in the system under study.
 
-In the basis of pz orbitals, denoted |i> with i as the atomic index, the Hamiltonian is represented by a Hamiltonian matrix whose elements: hij=tij include only interactions
-(or cutoff) of first neighbors, i.e., those that form direct bonds between them. If
-orbital i and j are neighbors, then tij = 2.7 eV; otherwise, tij = 0.
+To verify that these are indeed eigenstates, we will then check that the norm of vector $A$: 
 
-To calculate the elements hij of the matrix, we must set the condition that if the distance
-between the carbon atoms is less than 0.6*a, then hij is equal to 2.7 eV (if d < 0.6a:
-h[i][j]=2.7), with a being the lattice parameter a = 0.2456 nm.
-If the distance is greater than 0.6a, then hij is equal to 0 eV (else: h[i][j]= 0).
+$$\|A\| = \| \hat{H}_0 |n\rangle - E_n |n\rangle \| = 0$$
 
----
-IV)  Diagonalization of the Hamiltonian matrix
+If the norm is equal to zero, the Hamiltonian matrix is indeed diagonal in the basis of states $|n\rangle$.
 
-We are looking for a basis in which the Hamiltonian matrix of graphene is diagonal.
-So the first step will be to determine the eigenvalues, i.e., the eigenenergies
-of the system and the eigenvectors associated with these energies:
-<img width="100" height="48" alt="image" src="https://github.com/user-attachments/assets/fb4c971e-73db-48a9-a54d-c7743fe6edf8" />
-for n={0, ... , N-1} , N is the total number of orbitals in the system under study.
+So, to obtain the norms of $A$ for different eigenvectors (values of $n$), we first determine the norm from the first eigenvector $|n=1\rangle$, which we call $A_0$:
 
-To verify that these are indeed eigenstates, we will then check that the norm of the vector A: ||A||=||H0|n>-En|n>||=0
-If the norm is equal to zero, the Hamiltonian matrix is indeed diagonal in the basis of the states |n>.
+$$\text{norm} A_0 = \sqrt{(A[0])^2}$$
 
-So, to obtain the norms of A for different eigenvectors (values of n), we first
-determine the norm from the first eigenvector |n=1>, which we have called A0
-(norm_A0=np.sqrt((A[0])**2)), and then add the norms of the other eigenvectors |n=1>,
- which we call An (Norm_An=np.sqrt(np.sum((A[p])**2)), which allows us to obtain the
-norm as a function of the number of eigenvectors.
+and then add the norms of the other eigenvectors $|n=1\rangle$
+
+which we call $A_n$:
+
+$$\text{Norm} A_n = \sqrt{\sum (A[p])^2}$$
+
+This allows us to obtain the norm as a function of the number of eigenvectors.
 
 ---
-V) Clean states and their evolution in a time-independent potential:
+IV) Eigenstates and their Evolution in a Time-Independent Potential
 
-Diagonalizing the Hamiltonian matrix allows us to determine the eigenstates of the
-system at time t (which we will denote <img width="30" height="30" alt="image" src="https://github.com/user-attachments/assets/3cb15ccc-399a-4ee7-9a8d-7541908121d9" />) from an eigenstate at an initial time t0 <img width="35" height="35" alt="image" src="https://github.com/user-attachments/assets/0fde4baa-4624-4d90-97e6-5aa1a476e0d9" />. Since the Hamiltonian operator H is independent of time, we will use
-the time evolution operator: therefore, to find the eigenstates
-at t: <img width="177" height="26" alt="image" src="https://github.com/user-attachments/assets/cc7e3e72-95ba-4125-8415-3894cb33bd2e" />
+The diagonalization of the Hamiltonian matrix allows us to determine the eigenstates of the system at time $t$ (denoted $|\psi(t)\rangle$) starting from an initial eigenstate at time $t_0$ ($|\psi(t_0)\rangle$). Since the Hamiltonian operator $\hat{H}$ is time-independent, we use the time-evolution operator $U(t, t_0)$:
+
+$$U(t, t_0) = e^{-\frac{i}{\hbar} \hat{H} \times (t-t_0)}$$
+
+To find the eigenstate at time $t$: 
+$$|\psi(t)\rangle = U(t, t_0) |\psi(t_0)\rangle$$
+
+To calculate the evolution operator $U$, we utilize the `expm` function from the **SciPy** library, which computes the matrix exponential. This function handles the essential and complex step of changing the matrix basis to perform the calculation. 
+
+To simplify the code, we consider the variable $T = (t - t_0) / \hbar$. For a Hamiltonian in eV, $T$ is in $\text{eV}^{-1}$ and time in seconds is $t - t_0 = T \times \hbar$. Finally, $|\psi(t)\rangle$ is calculated via the matrix product
 
 To calculate the evolution operator U, we used a function from the
 Scipy library called expm, which allows us to calculate the matrix exponential
 of a matrix. This function itself performs the changes to a matrix basis
-(an essential and time-consuming step in calculating the matrix exponential). So we
-write the evolution operator U (U=expm(-1j*h*(t-t0)/ħ) with j a complex number “i”
-imaginary, t0 the time at the initial moment, t the time in seconds, and ħ the Planck constant).
+(an essential and time-consuming step in calculating the matrix exponential). 
 
-In the code and the rest of this report, we consider the variable T =(t-t0)/ħ to simplify
-the notation of time. So for a Hamiltonian in eV, T is in eV-1 and the time in seconds is t-t0 = T*h (eVs) = 1.054 571 818 × 10−34/1.602 176 634 × 10−19 =6.582119572*10-16 eVs ) and then perform the calculation of <img width="45" height="27" alt="image" src="https://github.com/user-attachments/assets/77f61bac-d173-470c-b2bb-1f45d5f5d4c0" /> by performing the matrix product of <img width="65" height="27" alt="image" src="https://github.com/user-attachments/assets/1546a8a0-204c-47ca-b3c0-53a843ea5660" /> and <img width="120" height="47" alt="image" src="https://github.com/user-attachments/assets/10d6205e-40a4-4fc3-accd-fc7e95a69d2c" /> (vecp_T=np.dot(U,vecp_initial)).
+So we write the evolution operator $$U(t, t_0) = e^{-\frac{i}{\hbar} \hat{H} (t-t_0)}$$
+
+In the Python implementation, this operator is calculated using the `expm` function from the SciPy library:
+
+#### Variables Definition:
+* **$j$**: The imaginary complex number (equivalent to $i$ in physics notation).
+* **$t_0$**: The initial time.
+* **$t$**: The time in seconds.
+* **$\hbar$**: The reduced Planck constant.
+* **$h$**: The Hamiltonian matrix.
+
+In the code and throughout this report, we use the variable $T = (t-t_{0})/\hbar$ to simplify the expression of time. 
+
+Thus, for a Hamiltonian expressed in eV, $T$ is in $\text{eV}^{-1}$ and the time in seconds is given by:
+$$t-t_{0} = T \times \hbar \text{ (eV}\cdot\text{s)}$$
+
+The calculation of $|\psi(t)\rangle$ is then performed by taking the matrix product of the initial state $|\psi(t_{0})\rangle$ and the time-evolution operator $U(t,t_{0}) = e^{-\frac{i}{\hbar}\hat{H} \times (t-t_0)}$:
 
 ---
+**Modeling and Results**
+---
+V) Modeling the structure of graphene
+---
+Here is our graphene ribbon containing 261 carbon atoms:
 
+<img width="2865" height="2115" alt="Capture d’écran 2026-01-28 174112_upscayl_5x_upscayl-standard-4x" src="https://github.com/user-attachments/assets/c6b4b8aa-134d-496d-b309-3eed8225f93d" />
 
+Graphene ribbon with a width
+l = 19 Å and a length L = 34 Å
+---
+
+VI) Modeling the evolution over time of a state specific to time T0 and T
+
+In this modeling of the eigenstate at the initial time T0 and the eigenstate at time
+T=100, we have chosen and that of the orbital at coordinate (-7;0), and we note that the
+probability of the presence of the eigenstate of our orbital does not change over time. This
+is normal because an eigenstate of the Hamiltonian is invariant over time.
