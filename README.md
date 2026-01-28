@@ -55,28 +55,32 @@ in the unit cell (the simplest repeating pattern).
 
 Graphene Lattice Geometry and Atom Positioning
 
-To model the hexagonal structure of graphene, we define two basis vectors, $\mathbf{a}$ and $\mathbf{b}$, which describe the translations of the lattice. Their coordinates are given by:
+To model the hexagonal structure of graphene, we define two basis vectors, $\mathbf{a}$ and $\mathbf{b}$, which describe the translations of the lattice. Their coordinates are expressed as vertical vectors:
 
 $$\mathbf{a} = a \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \quad \mathbf{b} = a \begin{pmatrix} -1/2 \\ \sqrt{3}/2 \end{pmatrix}$$
 
-Where $a$ is the graphene lattice parameter ($a = 0.246 \text{ nm}$). A translation vector $\mathbf{t} = n\mathbf{a} + m\mathbf{b}$ (where $n$ and $m$ are integers) provides the positions of carbon atoms belonging to the same lattice.
+Where $a$ is the graphene lattice parameter ($a = 0.246 \text{ nm}$). 
 
-Since the graphene pattern is composed of two atoms per unit cell, the translation vector $\mathbf{t}$ only allows us to obtain the positions of atoms in one sublattice. To define the second set of carbon atoms, we introduce a vector $\mathbf{c}$ with the following coordinates:
+
+
+A translation vector $\mathbf{t} = n\mathbf{a} + m\mathbf{b}$ (where $n$ and $m$ are integers) provides the positions of carbon atoms belonging to the same lattice. Since the graphene pattern is composed of two atoms per unit cell, the translation vector $\mathbf{t}$ only gives the positions for one sublattice. To define the second set of carbon atoms, we introduce a vector $\mathbf{c}$ with the following coordinates:
 
 $$\mathbf{c} = a \begin{pmatrix} 1/2 \\ 1/(2\sqrt{3}) \end{pmatrix}$$
 
 The positions of the atoms not belonging to the first lattice are thus obtained via $\mathbf{R} = n\mathbf{a} + m\mathbf{b} + \mathbf{c}$.
 
+
+
 #### Numerical Implementation with NumPy
 
-Using the **NumPy** library, we implement the translation vector $\mathbf{t}$ to obtain the positions of the carbon atoms. In the code, the positions are generated as follows:
+Using the **NumPy** library, we implement these vectors to generate the atomic positions. In the code, the positions are calculated as:
 
-* **For the first lattice:** `t = n*a + m*b`
-* **For the second lattice:** `R = n*a + m*b + np.array([1/2, 1/(np.sqrt(3)*2)]) * a`
+* **Sublattice A:** `t = n*a + m*b`
+* **Sublattice B:** `R = n*a + m*b + np.array([1/2, 1/(np.sqrt(3)*2)]) * a`
 
-We then create a table containing the positions of all carbon atoms, organized with columns for the coordinates:
-* $x = \text{t}[n][0]$
-* $y = \text{t}[n][1]$
+We then store these in a table where the coordinates are accessed as:
+* $x = \text{position}[n][0]$
+* $y = \text{position}[n][1]$
 
 ---
 **Calculation of the Hamiltonian**
